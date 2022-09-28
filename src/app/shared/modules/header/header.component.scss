@@ -1,15 +1,18 @@
 @import "abstracts/variables";
 .header-container {
+  height: 70px;
+  padding: 0px 10px;
   &__logo {
     img {
-      height: 40px;
-      width: 40px;
+      height: 80%;
+      width: 60px;
     }
   }
   &__links {
     .nav-btn{
         border-radius: 5px;
         color:$white;
+        background-color:$black;
     }
   }
 }

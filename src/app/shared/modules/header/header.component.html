@@ -4,14 +4,24 @@
     class="header-container d-flex justify-content-between primary-background"
   >
     <!-- logo -->
-    <div class="header-container__logo my-auto">
-      <img src="assets/media/logo.jpg" alt="logo" />
+    <div class="header-container__logo">
+      <img class="my-auto" src="assets/media/logo.jpg" alt="logo" />
     </div>
 
     <!-- links -->
     <div class="header-container__links fs-6 my-auto">
-      <button class="mx-2 nav-btn">{{ Eheader.EUR_USD_DETAILS }}</button>
-      <button class="nav-btn">{{ Eheader.EUR_GBP_DETAILS }}</button>
+      <button
+        class="nav-btn"
+        (click)="navigateToDetails(Eheader.EUR_USD_DETAILS)"
+      >
+        {{ Eheader.EUR_USD_DETAILS }}
+      </button>
+      <button
+        class="nav-btn mx-2"
+        (click)="navigateToDetails(Eheader.EUR_GBP_DETAILS)"
+      >
+        {{ Eheader.EUR_GBP_DETAILS }}
+      </button>
     </div>
   </div>
 </header>

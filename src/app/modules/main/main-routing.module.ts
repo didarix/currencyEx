@@ -3,14 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { EMainPaths } from './enums/paths.enum';
 import { MainComponent } from './main.component';
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     loadChildren: () =>
-//     import('./pages/home/home.module').then((m) => m.CurrencyExchangerModule),
-//   },
-// ];
-
 const routes: Routes = [
   {
     path: '',
