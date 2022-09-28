@@ -1,0 +1,15 @@
+@import "abstracts/variables";
+.header-container {
+  &__logo {
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+  &__links {
+    .nav-btn{
+        border-radius: 5px;
+        color:$white;
+    }
+  }
+}

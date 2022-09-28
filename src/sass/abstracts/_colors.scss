@@ -1,0 +1,38 @@
+:root {
+  /***** root primary colors ******/
+
+  /*  primary color */
+  --primary: #008cff;
+
+  /* Secondry color */
+  --secondary: #d5d8df;
+
+  /* white color */
+  --white: #fff;
+
+  /* black color */
+  --black: #000;
+
+  
+  /* ********** classes ************ */
+
+  /* primary color */
+  .primary-color {
+    color: var(--primary);
+  }
+
+  /* Secondry color */
+  .secondary-color {
+    color: var(--secondary);
+  }
+
+  /* primary background color */
+  .primary-background {
+    background-color: var(--primary);
+  }
+
+  /* Secondry background color */
+  .secondary-background {
+    background-color: var(--secondary);
+  }
+}

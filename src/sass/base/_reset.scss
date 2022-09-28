@@ -1,0 +1,23 @@
+/* reset html */
+html {
+  font-size: 24px;
+  height: 100%;
+  overflow-x: hidden;
+  top: unset;
+}
+
+/* reset body */
+body {
+  font-size: 1.6rem !important;
+  height: 100%;
+
+  &.rtl {
+    direction: rtl;
+  }
+}
+
+/* reset ul */
+ul {
+  padding: 0;
+  list-style-type: none !important;
+}
