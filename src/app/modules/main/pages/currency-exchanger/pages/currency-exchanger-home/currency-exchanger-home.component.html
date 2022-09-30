@@ -6,9 +6,15 @@
         <label for="amount">Amount</label>
         <input type="number" name="amount" (keyup)="getAmount($event)" />
       </div>
+      <!-- coverter panel -->
+      <div class="currency-exchanger__converter-panel">
+        <app-converter-panel></app-converter-panel>
+      </div>
     </div>
     <!-- converter -->
-    <div class="col-md-6">test</div>
+    <div class="col-md-6">
+      <app-currency-converter></app-currency-converter>
+    </div>
   </div>
   <!-- most popular currencies -->
   <div class="row m-2 p-2 border border-3 rounded"></div>
