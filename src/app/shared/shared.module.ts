@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './index';
-
-
-
-const DIRECTIVES = [];
+import { HeaderComponent, CurrencyConverterComponent } from './index';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HeaderComponent],
-  imports: [
-    CommonModule,
-  ],
+  declarations: [HeaderComponent, CurrencyConverterComponent],
+  imports: [CommonModule, ReactiveFormsModule],
 
   providers: [],
   exports: [HeaderComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

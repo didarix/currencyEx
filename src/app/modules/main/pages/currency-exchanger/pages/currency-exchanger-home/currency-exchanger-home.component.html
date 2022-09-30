@@ -1,1 +1,15 @@
-<p>currency-exchanger-home works!</p>
+<div class="currency-exchanger">
+  <div class="row m-2 p-2 border border-3 rounded">
+    <div class="col-md-6">
+      <!-- amount enter -->
+      <div class="currency-exchanger__amount-enter d-flex flex-column">
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" (keyup)="getAmount($event)" />
+      </div>
+    </div>
+    <!-- converter -->
+    <div class="col-md-6">test</div>
+  </div>
+  <!-- most popular currencies -->
+  <div class="row m-2 p-2 border border-3 rounded"></div>
+</div>

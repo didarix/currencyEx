@@ -9,6 +9,7 @@ import { EHeader } from '../../enums/header.enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  // header enum
   Eheader = EHeader;
   constructor(private router: Router) {}
 
