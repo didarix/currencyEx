@@ -3,12 +3,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 
-
-
-const MODULES = [
-  MainRoutingModule,
-  SharedModule
-];
+const MODULES = [MainRoutingModule, SharedModule];
 
 /**
  * COMPONENTS
@@ -21,4 +16,4 @@ const COMPONENTS = [MainComponent];
   exports: [],
   providers: [],
 })
-export class MainModule { }
+export class MainModule {}

@@ -9,10 +9,11 @@
     }
   }
   &__links {
-    .nav-btn{
-        border-radius: 5px;
-        color:$white;
-        background-color:$black;
+    .nav-btn {
+      border-radius: 5px;
+      color: $primary;
+      background-color: $white;
+      border: 1px solid $primary;
     }
     @media only screen and (max-width: 600px) {
       .nav-btn {

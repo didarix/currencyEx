@@ -4,23 +4,25 @@ import {
   HeaderComponent,
   CurrencyConverterComponent,
   ConverterPanelComponent,
+  MostPopularComponent,
 } from './index';
 import { ReactiveFormsModule } from '@angular/forms';
-import {} from './modules/converter-panel/converter-panel.component';
-
+import { SharedService } from './services/shared.service';
 @NgModule({
   declarations: [
     HeaderComponent,
     CurrencyConverterComponent,
     ConverterPanelComponent,
+    MostPopularComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
 
-  providers: [],
+  providers: [SharedService],
   exports: [
     HeaderComponent,
     CurrencyConverterComponent,
     ConverterPanelComponent,
+    MostPopularComponent,
   ],
 })
 export class SharedModule {}
