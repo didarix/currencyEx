@@ -15,7 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const modifiedReq = req.clone({
-      headers: req.headers.set('apikey', `7T8wcPJt8YgBASkcVUfkrBaCC78ukPOm`),
+      headers: req.headers.set('apikey', `FtUqAHCNJmHPQpsVmQtn3aHfokFjHk7W`),
     });
     return next.handle(modifiedReq);
   }

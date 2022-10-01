@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ECurrencyExchange } from 'src/app/modules/main/enums/currency-exchange.enum';
 import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
+import { EMainPaths } from 'src/app/modules/main/enums/paths.enum';
 
 @Component({
   selector: 'app-currency-exchanger-home',
@@ -12,10 +13,12 @@ export class CurrencyExchangerHomeComponent implements OnInit {
   currencyExchange = ECurrencyExchange;
   // most popular currency
   mostPopularNames = EMostPopularNames;
-  //from  currency name
+  // from  currency name
   from = EMostPopularNames.EUR;
   // amount
   amount: number = 1;
+  //  enum paths
+  eMainPaths = EMainPaths;
   constructor() {}
 
   ngOnInit(): void {}

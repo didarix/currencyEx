@@ -1,6 +1,6 @@
 <div class="currency-converter container">
   <!-- Form converter -->
-  <form [formGroup]="converterForm" (ngSubmit)="submit()">
+  <form *ngIf="currencysNames" [formGroup]="converterForm" (ngSubmit)="submit()">
     <div class="row">
       <div class="col-md-12 d-flex justify-content-between mb-3">
         <!-- From Dropdown -->
@@ -9,12 +9,15 @@
             EcurrencyConverter.FROM
           }}</label>
           <select
+            [attr.disabled]="amount && amount > 0 ? null : ''"
             class="currency-converter__from-select rounded border border-1 secondary-color fs-6"
-            (change)="changeCurrency($event)"
             formControlName="from"
           >
-            <option *ngFor="let currency of currencys" [ngValue]="currency">
-              {{ currency }}
+            <option
+              *ngFor="let currencysName of currencysNames | keyvalue"
+              [ngValue]="currencysName.key"
+            >
+              {{ currencysName.key }}
             </option>
           </select>
         </div>
@@ -32,19 +35,26 @@
         <div class="currency-converter__to">
           <label for="to" class="d-block">{{ EcurrencyConverter.TO }}</label>
           <select
+            [attr.disabled]="amount && amount > 0 ? null : ''"
             class="currency-converter__to-select rounded border border-1 secondary-color fs-6"
-            (change)="changeCurrency($event)"
             formControlName="to"
           >
-            <option *ngFor="let currency of currencys" [ngValue]="currency">
-              {{ currency }}
+            <option
+              *ngFor="let currencysName of currencysNames | keyvalue"
+              [ngValue]="currencysName.key"
+            >
+              {{ currencysName.key }}
             </option>
           </select>
         </div>
       </div>
       <!-- Convert Submit -->
       <div class="col-md-12 mb-3">
-        <button type="submit" class="btn btn-primary btn-block w-100">
+        <button
+          [attr.disabled]="amount && amount > 0 ? null : ''"
+          type="submit"
+          class="btn btn-primary btn-block w-100"
+        >
           {{ EcurrencyConverter.CONVERT }}
         </button>
       </div>
@@ -54,10 +64,14 @@
         <div
           class="currency-converter__display-value rounded border border-1 w-100 text-center"
         >
-          test
+          <span *ngIf="result">{{result| number}} {{to}}</span>
         </div>
         <!-- button more details -->
-        <button type="button" class="btn btn-primary btn-block ms-2 w-50">
+        <button
+          [hidden]="page != eMainPaths.HOME"
+          type="button"
+          class="btn btn-primary btn-block ms-2 w-50"
+        >
           {{ EcurrencyConverter.MORE_DETAILS }} &rarr;
         </button>
       </div>

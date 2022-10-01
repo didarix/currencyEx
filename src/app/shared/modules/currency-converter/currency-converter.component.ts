@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ApiResponse } from 'src/app/core/interfaces/api-response.interface';
+import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
+import { EMainPaths } from 'src/app/modules/main/enums/paths.enum';
 import { ECurrencyConverter } from '../../enums/currency-cenverter.enum';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-currency-converter',
@@ -8,40 +12,58 @@ import { ECurrencyConverter } from '../../enums/currency-cenverter.enum';
   styleUrls: ['./currency-converter.component.scss'],
 })
 export class CurrencyConverterComponent implements OnInit {
+  // currency amount
+  @Input() amount!: number;
+  // current page
+  @Input() page: string = EMainPaths.HOME;
   // currency converter enum
   EcurrencyConverter = ECurrencyConverter;
+  //  enum paths
+  eMainPaths = EMainPaths;
   // currencys Names
-  currencys: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
-  constructor(public fb: FormBuilder) {}
+  currencysNames: object = {};
+  //symbol from
+  from = EMostPopularNames.EUR;
+  //symbol to
+  to = EMostPopularNames.USD;
+  // currency result
+  result!: number;
 
-  ngOnInit(): void {}
+  constructor(public fb: FormBuilder, private sharedService: SharedService) {}
+
+  ngOnInit(): void {
+    this.getSymbols();
+  }
+
+  /**
+   * `getSymbols()`
+   * @description return all symbols names
+   */
+  getSymbols = () => {
+    this.sharedService.getSymbols().subscribe({
+      next: (response: ApiResponse) => {
+        this.currencysNames = response.symbols;
+      },
+    });
+  };
 
   /***** form *****/
   converterForm = this.fb.group({
-    from: ['Florida'],
-    to: ['South Dakota'],
+    from: [this.from],
+    to: [this.to],
   });
 
-  /**
-   * `changeCurrency()`
-   * @description get selected value
-   * @param  event event of selected
-   */
-  changeCurrency = (event: any) => {
-    console.log(event.value);
-    // this.converterForm.controls['to'].disable();
-  };
 
   /**
    * `swap()`
    * @description to swap value between from and to
    */
   swap = () => {
-    const toValue = this.converterForm.controls['to'].value;
-    const fromValue = this.converterForm.controls['from'].value;
+    const to = this.converterForm.controls['to'].value;
+    const from = this.converterForm.controls['from'].value;
 
-    this.converterForm.controls['to'].setValue(fromValue);
-    this.converterForm.controls['from'].setValue(toValue);
+    this.converterForm.controls['to'].setValue(from);
+    this.converterForm.controls['from'].setValue(to);
   };
 
   /**
@@ -49,10 +71,18 @@ export class CurrencyConverterComponent implements OnInit {
    * @description button to convert currency value
    */
   submit = () => {
-    if (!this.converterForm.valid) {
-      console.log('ss');
+    this.to = this.converterForm.controls['to'].value;
+    this.from = this.converterForm.controls['from'].value;
+    if (this.amount > 0) {
+      this.sharedService
+        .getConvertValue(this.from, this.to, this.amount)
+        .subscribe({
+          next: (response: ApiResponse) => {
+            this.result = response.result;
+          },
+        });
     } else {
-      console.log(JSON.stringify(this.converterForm.value));
+      alert(this.EcurrencyConverter.VALIDATION);
     }
   };
 }

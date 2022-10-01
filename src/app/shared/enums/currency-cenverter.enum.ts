@@ -4,4 +4,5 @@ export enum ECurrencyConverter {
   SWAP = ' swap ',
   FROM = 'From',
   TO = 'To',
+  VALIDATION = 'please enter valid value',
 }

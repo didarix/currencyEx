@@ -1,4 +1,5 @@
 <div class="currency-exchanger">
+    <div>{{currencyExchange.HEADER}}</div>
   <div class="row m-2 p-2 border border-3 rounded">
     <div class="col-md-6">
       <!-- amount enter -->
@@ -18,7 +19,10 @@
     </div>
     <!-- converter -->
     <div class="col-md-6">
-      <app-currency-converter></app-currency-converter>
+      <app-currency-converter
+        [page]="eMainPaths.HOME"
+        [amount]="amount"
+      ></app-currency-converter>
     </div>
   </div>
   <!-- most popular currencies -->

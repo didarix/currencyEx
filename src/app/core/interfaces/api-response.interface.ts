@@ -2,13 +2,14 @@ export interface ApiResponse {
   result: number;
   success: boolean;
   query?: {
-    amount:number;
-    from:string;
-    to:string;
+    amount: number;
+    from: string;
+    to: string;
   };
-  date?:string;
-  info?:{
-    rate:number;
-    timestamp:number;
-  }
+  date?: string;
+  info?: {
+    rate: number;
+    timestamp: number;
+  };
+  symbols?: {} | any;
 }
