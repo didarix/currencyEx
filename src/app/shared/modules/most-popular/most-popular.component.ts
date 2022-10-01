@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiResponse } from 'src/app/core/interfaces/api-response.interface';
+import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
 import { SharedService } from '../../services/shared.service';
 
 @Component({
@@ -9,10 +10,10 @@ import { SharedService } from '../../services/shared.service';
 })
 export class MostPopularComponent implements OnInit {
   // currency to name
-  @Input() to: string = 'USD';
+  @Input() to: string = EMostPopularNames.USD;
   // currency from name
-  @Input() from: string = 'EUR';
-  // currency from name
+  @Input() from: string = EMostPopularNames.EUR;
+  // currency amount
   @Input() amount: number = 1;
   // currency result
   result!: number;
@@ -35,10 +36,10 @@ export class MostPopularComponent implements OnInit {
    * @param  value currency value
    */
   getCurrencyValue = (from: string, to: string, amount: number) => {
-    this.sharedService.getConvertValue(from, to, amount).subscribe({
-      next: (response: ApiResponse) => {
-        this.result = response.result;
-      },
-    });
+    // this.sharedService.getConvertValue(from, to, amount).subscribe({
+    //   next: (response: ApiResponse) => {
+    //     this.result = response.result;
+    //   }
+    // });
   };
 }
