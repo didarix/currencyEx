@@ -1,6 +1,10 @@
 <div class="currency-converter container">
   <!-- Form converter -->
-  <form *ngIf="currencysNames" [formGroup]="converterForm" (ngSubmit)="submit()">
+  <form
+    *ngIf="currencysNames"
+    [formGroup]="converterForm"
+    (ngSubmit)="submit()"
+  >
     <div class="row">
       <div class="col-md-12 d-flex justify-content-between mb-3">
         <!-- From Dropdown -->
@@ -64,7 +68,7 @@
         <div
           class="currency-converter__display-value rounded border border-1 w-100 text-center"
         >
-          <span *ngIf="result">{{result| number}} {{to}}</span>
+          <span *ngIf="result">{{ result | number }} {{ to }}</span>
         </div>
         <!-- button more details -->
         <button

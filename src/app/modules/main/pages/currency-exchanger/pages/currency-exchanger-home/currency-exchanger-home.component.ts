@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ECurrencyExchange } from 'src/app/modules/main/enums/currency-exchange.enum';
 import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
 import { EMainPaths } from 'src/app/modules/main/enums/paths.enum';
+import { ToFrom } from '../../interfaces/toFrom.interface';
 
 @Component({
   selector: 'app-currency-exchanger-home',
@@ -14,7 +15,9 @@ export class CurrencyExchangerHomeComponent implements OnInit {
   // most popular currency
   mostPopularNames = EMostPopularNames;
   // from  currency name
-  from = EMostPopularNames.EUR;
+  from: string = EMostPopularNames.EUR;
+  // to  currency name
+  to: string = EMostPopularNames.USD;
   // amount
   amount: number = 1;
   //  enum paths
@@ -24,11 +27,12 @@ export class CurrencyExchangerHomeComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * `getAmount()`
-   * @description get value of input
+   * `getSelectedSymbols()`
+   * @description get selected value and set it
    * @param  event event of input
    */
-  getAmount = (event: any) => {
-    console.log(event.target.value);
-  };
+  getSelectedSymbols(event: ToFrom) {
+    this.to = event.to;
+    this.from = event.from;
+  }
 }

@@ -1,20 +1,15 @@
 <div class="currency-exchanger">
-    <div>{{currencyExchange.HEADER}}</div>
+  <div>{{ currencyExchange.HEADER }}</div>
   <div class="row m-2 p-2 border border-3 rounded">
     <div class="col-md-6">
       <!-- amount enter -->
       <div class="currency-exchanger__amount-enter d-flex flex-column">
         <label for="amount">{{ currencyExchange.AMOUNT }}</label>
-        <input
-          [(ngModel)]="amount"
-          type="number"
-          name="amount"
-          (keyup)="getAmount($event)"
-        />
+        <input [(ngModel)]="amount" type="number" name="amount" />
       </div>
       <!-- coverter panel -->
       <div class="currency-exchanger__converter-panel">
-        <app-converter-panel></app-converter-panel>
+        <app-converter-panel [amount]="amount" [to]="to" [from]="from"></app-converter-panel>
       </div>
     </div>
     <!-- converter -->
@@ -22,6 +17,7 @@
       <app-currency-converter
         [page]="eMainPaths.HOME"
         [amount]="amount"
+        (selectedSymbols)="getSelectedSymbols($event)"
       ></app-currency-converter>
     </div>
   </div>

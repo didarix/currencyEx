@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ApiResponse } from 'src/app/core/interfaces/api-response.interface';
 import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
 import { EMainPaths } from 'src/app/modules/main/enums/paths.enum';
+import { ToFrom } from 'src/app/modules/main/pages/currency-exchanger/interfaces/toFrom.interface';
 import { ECurrencyConverter } from '../../enums/currency-cenverter.enum';
 import { SharedService } from '../../services/shared.service';
 
@@ -16,16 +17,19 @@ export class CurrencyConverterComponent implements OnInit {
   @Input() amount!: number;
   // current page
   @Input() page: string = EMainPaths.HOME;
+  //symbol to and from selected Output
+  @Output() selectedSymbols = new EventEmitter<ToFrom>();
+  //symbol to value
+  to = EMostPopularNames.USD;
+  //symbol from value
+  from = EMostPopularNames.EUR;
   // currency converter enum
   EcurrencyConverter = ECurrencyConverter;
   //  enum paths
   eMainPaths = EMainPaths;
   // currencys Names
   currencysNames: object = {};
-  //symbol from
-  from = EMostPopularNames.EUR;
-  //symbol to
-  to = EMostPopularNames.USD;
+
   // currency result
   result!: number;
 
@@ -53,7 +57,6 @@ export class CurrencyConverterComponent implements OnInit {
     to: [this.to],
   });
 
-
   /**
    * `swap()`
    * @description to swap value between from and to
@@ -73,6 +76,7 @@ export class CurrencyConverterComponent implements OnInit {
   submit = () => {
     this.to = this.converterForm.controls['to'].value;
     this.from = this.converterForm.controls['from'].value;
+
     if (this.amount > 0) {
       this.sharedService
         .getConvertValue(this.from, this.to, this.amount)
@@ -81,6 +85,7 @@ export class CurrencyConverterComponent implements OnInit {
             this.result = response.result;
           },
         });
+      this.selectedSymbols.emit({ to: this.to, from: this.from });
     } else {
       alert(this.EcurrencyConverter.VALIDATION);
     }
