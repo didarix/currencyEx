@@ -13,7 +13,11 @@
             EcurrencyConverter.FROM
           }}</label>
           <select
-            [attr.disabled]="amount && amount > 0 ? null : ''"
+            [attr.disabled]="
+              (amount && amount <= 0) || !amount || page == eMainPaths.DETAILS
+                ? ''
+                : null
+            "
             class="currency-converter__from-select rounded border border-1 secondary-color fs-6"
             formControlName="from"
           >
@@ -75,6 +79,7 @@
           [hidden]="page != eMainPaths.HOME"
           type="button"
           class="btn btn-primary btn-block ms-2 w-50"
+          (click)="geDetails()"
         >
           {{ EcurrencyConverter.MORE_DETAILS }} &rarr;
         </button>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiResponse } from 'src/app/core/interfaces/api-response.interface';
 import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
 import { EMainPaths } from 'src/app/modules/main/enums/paths.enum';
@@ -28,12 +29,16 @@ export class CurrencyConverterComponent implements OnInit {
   //  enum paths
   eMainPaths = EMainPaths;
   // currencys Names
-  currencysNames: object = {};
+  currencysNames: object | any = {};
 
   // currency result
   result!: number;
 
-  constructor(public fb: FormBuilder, private sharedService: SharedService) {}
+  constructor(
+    public fb: FormBuilder,
+    private sharedService: SharedService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getSymbols();
@@ -69,6 +74,21 @@ export class CurrencyConverterComponent implements OnInit {
     this.converterForm.controls['from'].setValue(to);
   };
 
+  /**
+   * geDetails()
+   * @description navigate to details page
+   */
+  geDetails = () => {
+    const fullName = this.currencysNames[this.from];
+    this.router.navigate(['/details'], {
+      queryParams: {
+        amount: this.amount,
+        to: this.to,
+        from: this.from,
+        fullName: fullName,
+      },
+    });
+  };
   /**
    * `submit()`
    * @description button to convert currency value

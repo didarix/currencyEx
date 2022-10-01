@@ -1,5 +1,5 @@
 <div class="currency-exchanger">
-  <div>{{ currencyExchange.HEADER }}</div>
+  <div class="currency-exchanger__title ms-2">{{ currencyExchange.HEADER }}</div>
   <div class="row m-2 p-2 border border-3 rounded">
     <div class="col-md-6">
       <!-- amount enter -->
@@ -9,11 +9,15 @@
       </div>
       <!-- coverter panel -->
       <div class="currency-exchanger__converter-panel">
-        <app-converter-panel [amount]="amount" [to]="to" [from]="from"></app-converter-panel>
+        <app-converter-panel
+          [amount]="amount"
+          [to]="to"
+          [from]="from"
+        ></app-converter-panel>
       </div>
     </div>
     <!-- converter -->
-    <div class="col-md-6">
+    <div class="currency-exchanger-__currency-converter col-md-6">
       <app-currency-converter
         [page]="eMainPaths.HOME"
         [amount]="amount"
@@ -22,7 +26,10 @@
     </div>
   </div>
   <!-- most popular currencies -->
-  <div *ngIf="amount > 0" class="row m-2 p-2 border border-3 rounded">
+  <div
+    *ngIf="amount > 0"
+    class="currency-exchanger__most-popular row m-2 p-2 border border-3 rounded"
+  >
     <div
       *ngFor="let mostPopularName of mostPopularNames | keyvalue"
       class="col-md-4 p-2"

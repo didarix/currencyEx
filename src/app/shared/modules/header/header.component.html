@@ -12,15 +12,15 @@
     <div class="header-container__links fs-6 my-auto">
       <button
         class="nav-btn"
-        (click)="navigateToDetails(Eheader.EUR_USD_DETAILS)"
+        (click)="geDetails(eMostPopularNames.EUR , eMostPopularNames.USD)"
       >
-        {{ Eheader.EUR_USD_DETAILS }}
+        {{ eheader.EUR_USD_DETAILS }}
       </button>
       <button
-        class="nav-btn mx-2"
-        (click)="navigateToDetails(Eheader.EUR_GBP_DETAILS)"
+        class="nav-btn ms-2"
+        (click)="geDetails(eMostPopularNames.USD,eMostPopularNames.EUR)"
       >
-        {{ Eheader.EUR_GBP_DETAILS }}
+        {{ eheader.EUR_GBP_DETAILS }}
       </button>
     </div>
   </div>

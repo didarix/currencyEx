@@ -1,1 +1,51 @@
-<p>currency-exchanger-details works!</p>
+<div class="currency-exchanger-details">
+  <div class="d-flex justify-content-between">
+    <div class="currency-exchanger-details__title pt-2 ms-2">
+      <span *ngIf="fullName">{{ from }} - {{ fullName }}</span>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary btn-block p-1 m-2"
+      (click)="geHome()"
+    >
+      {{ eCurrencyExchangeDetails.BACK_TO_HOME }} &rarr;
+    </button>
+  </div>
+  <div class="row m-2 p-2 border border-3 rounded">
+    <div class="col-md-6">
+      <!-- amount enter -->
+      <div class="currency-exchanger__amount-enter d-flex flex-column">
+        <label for="amount">{{ currencyExchange.AMOUNT }}</label>
+        <input [(ngModel)]="amount" type="number" name="amount" />
+      </div>
+      <!-- coverter panel -->
+      <div class="currency-exchanger-details__converter-panel">
+        <app-converter-panel
+          [amount]="amount"
+          [to]="to"
+          [from]="from"
+        ></app-converter-panel>
+      </div>
+    </div>
+    <!-- converter -->
+    <div class="currency-exchanger-details__currency-converter col-md-6">
+      <app-currency-converter
+        [page]="eMainPaths.DETAILS"
+        [amount]="amount"
+        (selectedSymbols)="getSelectedSymbols($event)"
+      ></app-currency-converter>
+    </div>
+  </div>
+  <!-- chart -->
+  <div
+    *ngIf="amount > 0"
+    class="currency-exchanger-details__chart row m-2 p-2 border border-3 rounded"
+  ></div>
+  <!-- validation error -->
+  <div
+    *ngIf="!amount || amount <= 0"
+    class="border m-2 p-2 border-3 rounded text-center"
+  >
+    {{ currencyExchange.VALIDATION }}
+  </div>
+</div>
