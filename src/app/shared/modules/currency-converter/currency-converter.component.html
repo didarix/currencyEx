@@ -1,1 +1,66 @@
-<p>currency-converter works!</p>
+<div class="currency-converter container">
+  <!-- Form converter -->
+  <form [formGroup]="converterForm" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-between mb-3">
+        <!-- From Dropdown -->
+        <div class="currency-converter__from">
+          <label for="from" class="d-block">{{
+            EcurrencyConverter.FROM
+          }}</label>
+          <select
+            class="currency-converter__from-select rounded border border-1 secondary-color fs-6"
+            (change)="changeCurrency($event)"
+            formControlName="from"
+          >
+            <option *ngFor="let currency of currencys" [ngValue]="currency">
+              {{ currency }}
+            </option>
+          </select>
+        </div>
+        <!-- swap button -->
+        <div class="currency-converter__swap d-flex align-items-end">
+          <button
+            (click)="swap()"
+            type="button"
+            class="btn btn-primary btn-block py-0"
+          >
+            &larr;{{ EcurrencyConverter.SWAP }}&rarr;
+          </button>
+        </div>
+        <!-- To Dropdown -->
+        <div class="currency-converter__to">
+          <label for="to" class="d-block">{{ EcurrencyConverter.TO }}</label>
+          <select
+            class="currency-converter__to-select rounded border border-1 secondary-color fs-6"
+            (change)="changeCurrency($event)"
+            formControlName="to"
+          >
+            <option *ngFor="let currency of currencys" [ngValue]="currency">
+              {{ currency }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- Convert Submit -->
+      <div class="col-md-12 mb-3">
+        <button type="submit" class="btn btn-primary btn-block w-100">
+          {{ EcurrencyConverter.CONVERT }}
+        </button>
+      </div>
+
+      <div class="col-md-12 d-flex">
+        <!-- display value -->
+        <div
+          class="currency-converter__display-value rounded border border-1 w-100 text-center"
+        >
+          test
+        </div>
+        <!-- button more details -->
+        <button type="button" class="btn btn-primary btn-block ms-2 w-50">
+          {{ EcurrencyConverter.MORE_DETAILS }} &rarr;
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
