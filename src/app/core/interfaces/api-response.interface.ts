@@ -12,4 +12,5 @@ export interface ApiResponse {
     timestamp: number;
   };
   symbols?: {} | any;
+  rates?: {} | any;
 }

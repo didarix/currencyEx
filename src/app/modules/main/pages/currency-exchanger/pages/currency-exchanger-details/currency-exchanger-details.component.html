@@ -41,8 +41,8 @@
     *ngIf="amount > 0"
     class="currency-exchanger-details__chart row m-2 p-2 border border-3 rounded"
   >
-<app-historical-chart></app-historical-chart>
-</div>
+    <app-historical-chart [to]="to" [from]="from"></app-historical-chart>
+  </div>
   <!-- validation error -->
   <div
     *ngIf="!amount || amount <= 0"

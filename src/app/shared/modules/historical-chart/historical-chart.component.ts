@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
+import { ApiResponse } from 'src/app/core/interfaces/api-response.interface';
+import { EMostPopularNames } from 'src/app/modules/main/enums/most-popular-names.enum';
+import { SharedService } from '../../services/shared.service';
 import { ChartOptions } from '../../types/chart-options.type';
-
+import { format, lastDayOfMonth } from 'date-fns';
 @Component({
   selector: 'app-historical-chart',
   templateUrl: './historical-chart.component.html',
@@ -9,37 +12,71 @@ import { ChartOptions } from '../../types/chart-options.type';
 })
 export class HistoricalChartComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
-  //last day in every mounth last year
-  PastYearDates = [
-    '2021-01-31',
-    '2021-02-28',
-    '2021-03-31',
-    '2021-04-30',
-    '2021-05-31',
-    '2021-06-30',
-    '2021-07-31',
-    '2021-08-31',
-    '2021-09-30',
-    '2021-10-31',
-    '2021-11-30',
-    '2021-12-31',
-  ];
 
-  rates = [100.2121, 41, 35, 51, 49, 62, 69, 91, 148];
+  // currency to name
+  @Input() to: string = EMostPopularNames.USD;
+  // currency from name
+  @Input() from: string = EMostPopularNames.EUR;
+  //today
+  today = new Date();
+  //last day in every mounth last year
+  PastYearDates: any = [];
+  // rates
+  rates: EMostPopularNames[] = [];
   //chart options
-  chartOptions!: Partial<ChartOptions>;
-  constructor() {}
+  public chartOptions!: Partial<ChartOptions>;
+
+  constructor(public sharedService: SharedService) {}
 
   ngOnInit(): void {
-    this.getRates();
-    this.buildChart();
+    this.getLastDay();
+    if (this.PastYearDates.length == 12) {
+      this.getRates();
+      if (this.rates.length == 12) {
+        this.buildChart();
+      }
+    }
   }
+
+  ngOnChanges(): void {
+    this.getLastDay();
+    if (this.PastYearDates.length == 12) {
+      this.getRates();
+      if (this.rates.length == 12) {
+        this.buildChart();
+      }
+    }
+  }
+  /***
+   * `getLastDay()`
+   * @description get last day in every mounth past
+   *  year and push in new array PastYearDates a
+   */
+  getLastDay() {
+    for (let i = 0; i < 12; i++) {
+      const newDay = new Date();
+      // past Month
+      const pastMonth = new Date(newDay.setMonth(this.today.getMonth() - i));
+      //last day of past month
+      const lastDay = format(lastDayOfMonth(pastMonth), 'yyyy-MM-dd');
+      this.PastYearDates.push(lastDay);
+    }
+  }
+  /**
+   * `getRates()`
+   * @description get all rates
+   */
   getRates() {
-    this.PastYearDates.forEach((date) => {
-      console.log(date);
+    this.PastYearDates.forEach((date: any) => {
+      this.sharedService.getRates(this.from, this.to, date).subscribe({
+        next: (response: ApiResponse) => {
+          this.rates.push(response.rates[this.to]);
+        },
+      });
     });
   }
   /**
+   * `buildChart()`
    * @description build chart ui
    */
   buildChart() {
@@ -47,7 +84,7 @@ export class HistoricalChartComponent implements OnInit {
       series: [
         {
           name: 'rate',
-          rates: this.rates,
+          data: this.rates,
         },
       ],
       chart: {

@@ -28,6 +28,21 @@ export class SharedService {
   }
 
   /**
+   * getRates()
+   * @description get rates
+   * @param from
+   * @param to
+   * @param date
+   * @returns rates
+   */
+  getRates(from: string, to: string, date: any): Observable<any> {
+    const url = APIURL.fixer;
+    return this.http
+      .get(`${url}/${date}?symbols=${to}&base=${from}`)
+      .pipe(take(1));
+  }
+
+  /**
    * getSymbols()
    * @description to get all currency symbols
    * @returns symbols
