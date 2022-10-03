@@ -41,6 +41,7 @@ export class CurrencyConverterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.result= 0;
     this.getSymbols();
   }
 
@@ -98,6 +99,8 @@ export class CurrencyConverterComponent implements OnInit {
     this.from = this.converterForm.controls['from'].value;
 
     if (this.amount > 0) {
+
+      // call service covert
       this.sharedService
         .getConvertValue(this.from, this.to, this.amount)
         .subscribe({
@@ -105,6 +108,8 @@ export class CurrencyConverterComponent implements OnInit {
             this.result = response.result;
           },
         });
+
+      // emit to and from
       this.selectedSymbols.emit({ to: this.to, from: this.from });
     } else {
       alert(this.EcurrencyConverter.VALIDATION);

@@ -36,10 +36,10 @@ export class MostPopularComponent implements OnInit {
    * @param  value currency value
    */
   getCurrencyValue = (from: string, to: string, amount: number) => {
-    // this.sharedService.getConvertValue(from, to, amount).subscribe({
-    //   next: (response: ApiResponse) => {
-    //     this.result = response.result;
-    //   }
-    // });
+    this.sharedService.getConvertValue(from, to, amount).subscribe({
+      next: (response: ApiResponse) => {
+        this.result = response.result;
+      }
+    });
   };
 }

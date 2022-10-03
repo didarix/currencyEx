@@ -5,17 +5,21 @@ import {
   CurrencyConverterComponent,
   ConverterPanelComponent,
   MostPopularComponent,
+  HistoricalChartComponent,
 } from './index';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedService } from './services/shared.service';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 @NgModule({
   declarations: [
     HeaderComponent,
     CurrencyConverterComponent,
     ConverterPanelComponent,
     MostPopularComponent,
+    HistoricalChartComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgApexchartsModule],
 
   providers: [SharedService],
   exports: [
@@ -23,6 +27,7 @@ import { SharedService } from './services/shared.service';
     CurrencyConverterComponent,
     ConverterPanelComponent,
     MostPopularComponent,
+    HistoricalChartComponent,
   ],
 })
 export class SharedModule {}
