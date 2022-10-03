@@ -48,7 +48,7 @@ export class CurrencyExchangerDetailsComponent implements OnInit {
    * `getQueryParams()`
    * @description get data from queryParams
    */
-  getQueryParams = () => {
+  getQueryParams() {
     /**get all params */
     this.route.queryParams.subscribe((params: any) => {
       this.amount = params.amount;
@@ -56,12 +56,12 @@ export class CurrencyExchangerDetailsComponent implements OnInit {
       this.to = params.to;
       this.fullName = params.fullName;
     });
-  };
+  }
   /**
    * `geHome()`
    * @description navigate to home page
    */
-  geHome = () => {
+  geHome() {
     this.router.navigate(['/']);
-  };
+  }
 }

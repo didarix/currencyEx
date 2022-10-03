@@ -28,6 +28,15 @@ export class HistoricalChartComponent implements OnInit {
 
   constructor(public sharedService: SharedService) {}
 
+  ngOnChanges(): void {
+    this.getLastDay();
+    if (this.PastYearDates.length == 12) {
+      this.getRates();
+      if (this.rates.length == 12) {
+        this.buildChart();
+      }
+    }
+  }
   ngOnInit(): void {
     this.getLastDay();
     if (this.PastYearDates.length == 12) {
@@ -38,15 +47,6 @@ export class HistoricalChartComponent implements OnInit {
     }
   }
 
-  ngOnChanges(): void {
-    this.getLastDay();
-    if (this.PastYearDates.length == 12) {
-      this.getRates();
-      if (this.rates.length == 12) {
-        this.buildChart();
-      }
-    }
-  }
   /***
    * `getLastDay()`
    * @description get last day in every mounth past

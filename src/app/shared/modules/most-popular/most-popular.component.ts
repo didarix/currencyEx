@@ -18,7 +18,7 @@ export class MostPopularComponent implements OnInit {
   // currency result
   result!: number;
 
-  constructor(public sharedService: SharedService) {}
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.getCurrencyValue(this.from, this.to, this.amount);
@@ -35,11 +35,11 @@ export class MostPopularComponent implements OnInit {
    * @param  to currency to
    * @param  value currency value
    */
-  getCurrencyValue = (from: string, to: string, amount: number) => {
+  getCurrencyValue(from: string, to: string, amount: number) {
     this.sharedService.getConvertValue(from, to, amount).subscribe({
       next: (response: ApiResponse) => {
         this.result = response.result;
-      }
+      },
     });
-  };
+  }
 }

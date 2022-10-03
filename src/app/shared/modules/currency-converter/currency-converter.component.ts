@@ -41,7 +41,7 @@ export class CurrencyConverterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.result= 0;
+    this.result = 0;
     this.getSymbols();
   }
 
@@ -49,13 +49,13 @@ export class CurrencyConverterComponent implements OnInit {
    * `getSymbols()`
    * @description return all symbols names
    */
-  getSymbols = () => {
+  getSymbols() {
     this.sharedService.getSymbols().subscribe({
       next: (response: ApiResponse) => {
         this.currencysNames = response.symbols;
       },
     });
-  };
+  }
 
   /***** form *****/
   converterForm = this.fb.group({
@@ -67,19 +67,19 @@ export class CurrencyConverterComponent implements OnInit {
    * `swap()`
    * @description to swap value between from and to
    */
-  swap = () => {
+  swap() {
     const to = this.converterForm.controls['to'].value;
     const from = this.converterForm.controls['from'].value;
 
     this.converterForm.controls['to'].setValue(from);
     this.converterForm.controls['from'].setValue(to);
-  };
+  }
 
   /**
    * geDetails()
    * @description navigate to details page
    */
-  geDetails = () => {
+  geDetails() {
     const fullName = this.currencysNames[this.from];
     this.router.navigate(['/details'], {
       queryParams: {
@@ -89,17 +89,16 @@ export class CurrencyConverterComponent implements OnInit {
         fullName: fullName,
       },
     });
-  };
+  }
   /**
    * `submit()`
    * @description button to convert currency value
    */
-  submit = () => {
+  submit() {
     this.to = this.converterForm.controls['to'].value;
     this.from = this.converterForm.controls['from'].value;
 
     if (this.amount > 0) {
-
       // call service covert
       this.sharedService
         .getConvertValue(this.from, this.to, this.amount)
@@ -114,5 +113,5 @@ export class CurrencyConverterComponent implements OnInit {
     } else {
       alert(this.EcurrencyConverter.VALIDATION);
     }
-  };
+  }
 }
